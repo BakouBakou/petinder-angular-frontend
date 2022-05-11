@@ -9,7 +9,9 @@ import {Pet} from "../../model/Pet";
 })
 export class ProfileGalleryComponent implements OnInit {
 
-  public pets: Pet[];
+  pets: Pet[];
+  private _selectedPet!: Pet;
+  private _searchText: string = '';
 
   constructor(private petService: PetService) {
     this.pets = [];
@@ -19,7 +21,26 @@ export class ProfileGalleryComponent implements OnInit {
     this.getPets()
   }
 
+  get selectedPet(): Pet {
+    return this._selectedPet;
+  }
+  set selectedPet(value: Pet) {
+    this._selectedPet = value;
+  }
+
+  get searchText(): string {
+    return this._searchText;
+  }
+
+  set searchText(value: string) {
+    this._searchText = value;
+  }
+
   private getPets(): void {
     this.petService.getPets().subscribe(result => this.pets = result);
+  }
+
+  selectPet(pet: Pet): void {
+    this._selectedPet = pet;
   }
 }

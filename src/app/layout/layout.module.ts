@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { LayoutComponent } from './layout/layout.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {LayoutComponent} from './layout/layout.component';
 import {RouterModule} from "@angular/router";
 import {ProfileGalleryComponent} from "./profile-gallery/profile-gallery.component";
-
+import {FormsModule} from "@angular/forms";
+import {NameFilterPipe} from "../pipes/name-filter.pipe";
 
 
 @NgModule({
@@ -13,11 +14,13 @@ import {ProfileGalleryComponent} from "./profile-gallery/profile-gallery.compone
     HeaderComponent,
     FooterComponent,
     ProfileGalleryComponent,
-    LayoutComponent
+    LayoutComponent,
+    NameFilterPipe
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     LayoutComponent
