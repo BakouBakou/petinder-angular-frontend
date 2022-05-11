@@ -5,7 +5,7 @@ import {FooterComponent} from './footer/footer.component';
 import {LayoutComponent} from './layout/layout.component';
 import {RouterModule} from "@angular/router";
 import {ProfileGalleryComponent} from "./profile-gallery/profile-gallery.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NameFilterPipe} from "../pipes/name-filter.pipe";
 
 
@@ -20,7 +20,8 @@ import {NameFilterPipe} from "../pipes/name-filter.pipe";
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     LayoutComponent

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PetService} from "../../service/pet.service";
 import {Pet} from "../../model/Pet";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-profile-gallery',
@@ -13,7 +14,14 @@ export class ProfileGalleryComponent implements OnInit {
   private _selectedPet!: Pet;
   private _searchText: string = '';
 
-  constructor(private petService: PetService) {
+  addPetForm = this.formBuilder.group({
+    name: '',
+    kind: '',
+    image: '',
+    profileText: '',
+  })
+
+  constructor(private petService: PetService, private formBuilder: FormBuilder) {
     this.pets = [];
   }
 
@@ -24,9 +32,6 @@ export class ProfileGalleryComponent implements OnInit {
   get selectedPet(): Pet {
     return this._selectedPet;
   }
-  set selectedPet(value: Pet) {
-    this._selectedPet = value;
-  }
 
   get searchText(): string {
     return this._searchText;
@@ -36,11 +41,29 @@ export class ProfileGalleryComponent implements OnInit {
     this._searchText = value;
   }
 
+  addPet(pet: Pet): void {
+    this.petService.addPet(pet).subscribe(() => {this.pets = [...this.pets, pet]});
+  }
+
   private getPets(): void {
     this.petService.getPets().subscribe(result => this.pets = result);
   }
 
   selectPet(pet: Pet): void {
     this._selectedPet = pet;
+    console.log(pet);
+  }
+
+  onSubmit(): void {
+    this.addPet(this.addPetForm.value);
+    console.log(this.addPetForm.value);
+    this.addPetForm.reset();
+  }
+
+  imageDomain(pet: Pet): string {
+    if (pet.id > 7 || pet.id === undefined) {
+      return 'http://localhost:4200/assets/'
+    }
+    return 'https://pettinder.herokuapp.com/'
   }
 }
