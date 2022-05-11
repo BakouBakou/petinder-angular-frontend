@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import {RouterModule} from "@angular/router";
+import {ProfileGalleryComponent} from "./profile-gallery/profile-gallery.component";
 
 
 
@@ -11,6 +12,7 @@ import {RouterModule} from "@angular/router";
   declarations: [
     HeaderComponent,
     FooterComponent,
+    ProfileGalleryComponent,
     LayoutComponent
   ],
   imports: [
