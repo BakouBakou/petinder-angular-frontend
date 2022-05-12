@@ -13,7 +13,7 @@ import {closeSubscription, imageDomain} from "../helpers/helper-functions";
 })
 export class ProfileGalleryComponent implements OnInit, OnDestroy {
 
-  pets!: Pet[];
+  pets: Pet[] = [];
   private _selectedPet!: Pet;
   private _searchText: string = '';
   private getPetsSubscription!: Subscription;
@@ -29,7 +29,6 @@ export class ProfileGalleryComponent implements OnInit, OnDestroy {
   })
 
   constructor(private petService: PetService, private formBuilder: FormBuilder) {
-    // this.pets = [];
   }
 
   ngOnDestroy(): void {
