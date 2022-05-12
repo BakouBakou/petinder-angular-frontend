@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {LayoutModule} from "./layout/layout.module";
 import {HttpClientModule} from "@angular/common/http";
 import { SetupDateComponent } from './date/setup-date/setup-date.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SetupDateComponent } from './date/setup-date/setup-date.component';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   exports: [

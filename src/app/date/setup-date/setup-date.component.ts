@@ -4,6 +4,7 @@ import {PetService} from "../../service/pet.service";
 import {Pet} from "../../model/Pet";
 import {Subscription} from "rxjs";
 import {closeSubscription, imageDomain} from 'src/app/helpers/helper-functions';
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-setup-date',
@@ -16,10 +17,16 @@ export class SetupDateComponent implements OnInit, OnDestroy {
 
   imageDomain: Function = imageDomain;
 
-  constructor(private route: ActivatedRoute, private petService: PetService) { }
+  sendTextForm = this.formBuilder.group({
+    name: '',
+  })
+
+  private routeParamSubscription!: Subscription;
+
+  constructor(private route: ActivatedRoute, private petService: PetService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(paramMap => {
+    this.routeParamSubscription = this.route.paramMap.subscribe(paramMap => {
       console.log(paramMap);
       let name = paramMap.get('name');
       this.getPetByName(name || '');
@@ -28,9 +35,20 @@ export class SetupDateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     closeSubscription(this.getPetByNameSubscription);
+    closeSubscription(this.routeParamSubscription);
+
   }
 
   private getPetByName(name: string): void {
     this.getPetByNameSubscription = this.petService.getPetByName(name).subscribe(result => this.pet = result);
+  }
+
+  onSubmitLetsPlay() {
+    // this.sendMessage(); //not working for now as it requires authentication
+    console.log(this.sendTextForm.value);
+  }
+
+  sendMessage() {
+    this.petService.sendWhatsApp(this.sendTextForm.value).subscribe(()=>{});
   }
 }

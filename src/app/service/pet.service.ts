@@ -32,4 +32,8 @@ export class PetService {
     return this.http.delete<Pet>(this.url + '/' + id);
   }
 
+  sendWhatsApp(name: string): Observable<void> {
+    return this.http.post<void>(this.url + '/sendText', name);
+  }
+
 }
