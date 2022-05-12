@@ -20,8 +20,8 @@ export class PetService {
       .pipe(map(pets => pets.sort((a, b) => a.name.localeCompare(b.name))));
   }
 
-  addPet(pet: Pet): Observable<Pet> {
-    return this.http.post<Pet>(this.url, pet);
+  addPet(pet: Pet): Observable<void> {
+    return this.http.post<void>(this.url, pet);
   }
 
   getPetByName(name: string): Observable<Pet> {
