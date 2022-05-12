@@ -6,7 +6,7 @@ const localImagesUrl = 'http://localhost:4200/assets/';
 const remoteImagesUrl = 'https://pettinder.herokuapp.com/';
 
 export function imageDomain(pet: Pet): string {
-  if ((pet.id > 7 || pet.id === undefined) && environment.production) {
+  if ((pet.id > 7 || pet.id === undefined) && !environment.production) {
     return localImagesUrl
   }
   return remoteImagesUrl
