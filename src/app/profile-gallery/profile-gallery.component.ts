@@ -1,18 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {PetService} from "../../service/pet.service";
-import {Pet} from "../../model/Pet";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PetService} from "../service/pet.service";
+import {Pet} from "../model/Pet";
 import {FormBuilder} from "@angular/forms";
+import {Subscription} from "rxjs";
+import {closeSubscription, imageDomain} from "../helpers/helper-functions";
+
 
 @Component({
   selector: 'app-profile-gallery',
   templateUrl: './profile-gallery.component.html',
   styleUrls: ['./profile-gallery.component.css']
 })
-export class ProfileGalleryComponent implements OnInit {
+export class ProfileGalleryComponent implements OnInit, OnDestroy {
 
   pets: Pet[];
   private _selectedPet!: Pet;
   private _searchText: string = '';
+  private getPetsSubscription!: Subscription;
+  private addPetSubscription!: Subscription;
+
+  imageDomain: Function = imageDomain;
 
   addPetForm = this.formBuilder.group({
     name: '',
@@ -23,6 +30,11 @@ export class ProfileGalleryComponent implements OnInit {
 
   constructor(private petService: PetService, private formBuilder: FormBuilder) {
     this.pets = [];
+  }
+
+  ngOnDestroy(): void {
+        closeSubscription(this.addPetSubscription);
+        closeSubscription(this.getPetsSubscription);
   }
 
   ngOnInit(): void {
@@ -42,11 +54,11 @@ export class ProfileGalleryComponent implements OnInit {
   }
 
   addPet(pet: Pet): void {
-    this.petService.addPet(pet).subscribe(() => {this.pets = [...this.pets, pet]});
+    this.addPetSubscription = this.petService.addPet(pet).subscribe(() => {this.pets = [...this.pets, pet]});
   }
 
   private getPets(): void {
-    this.petService.getPets().subscribe(result => this.pets = result);
+    this.getPetsSubscription = this.petService.getPets().subscribe(result => this.pets = result);
   }
 
   selectPet(pet: Pet): void {
@@ -60,10 +72,4 @@ export class ProfileGalleryComponent implements OnInit {
     this.addPetForm.reset();
   }
 
-  imageDomain(pet: Pet): string {
-    if (pet.id > 7 || pet.id === undefined) {
-      return 'http://localhost:4200/assets/'
-    }
-    return 'https://pettinder.herokuapp.com/'
-  }
 }

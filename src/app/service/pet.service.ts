@@ -24,4 +24,8 @@ export class PetService {
     return this.http.post<Pet>(this.url, pet);
   }
 
+  getPetByName(name: string): Observable<Pet> {
+    return this.http.get<Pet>(this.url + '/' + name);
+  }
+
 }

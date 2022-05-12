@@ -4,7 +4,7 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {LayoutComponent} from './layout/layout.component';
 import {RouterModule} from "@angular/router";
-import {ProfileGalleryComponent} from "./profile-gallery/profile-gallery.component";
+import {ProfileGalleryComponent} from "../profile-gallery/profile-gallery.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NameFilterPipe} from "../pipes/name-filter.pipe";
 
