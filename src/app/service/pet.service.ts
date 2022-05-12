@@ -28,4 +28,8 @@ export class PetService {
     return this.http.get<Pet>(this.url + '/' + name);
   }
 
+  deleteById(id: number): Observable<Pet> {
+    return this.http.delete<Pet>(this.url + '/' + id);
+  }
+
 }

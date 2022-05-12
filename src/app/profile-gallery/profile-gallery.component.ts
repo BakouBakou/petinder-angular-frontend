@@ -13,7 +13,7 @@ import {closeSubscription, imageDomain} from "../helpers/helper-functions";
 })
 export class ProfileGalleryComponent implements OnInit, OnDestroy {
 
-  pets: Pet[];
+  pets!: Pet[];
   private _selectedPet!: Pet;
   private _searchText: string = '';
   private getPetsSubscription!: Subscription;
@@ -29,7 +29,7 @@ export class ProfileGalleryComponent implements OnInit, OnDestroy {
   })
 
   constructor(private petService: PetService, private formBuilder: FormBuilder) {
-    this.pets = [];
+    // this.pets = [];
   }
 
   ngOnDestroy(): void {
@@ -54,7 +54,10 @@ export class ProfileGalleryComponent implements OnInit, OnDestroy {
   }
 
   addPet(pet: Pet): void {
-    this.addPetSubscription = this.petService.addPet(pet).subscribe(() => {this.pets = [...this.pets, pet]});
+    this.addPetSubscription = this.petService.addPet(pet).subscribe(() => {
+      // this.pets = [...this.pets, pet]; // this works
+      this.getPets(); // but I prefer this, as it is immediately sorted at the same time, though it makes an API call
+    });
   }
 
   private getPets(): void {
@@ -70,6 +73,13 @@ export class ProfileGalleryComponent implements OnInit, OnDestroy {
     this.addPet(this.addPetForm.value);
     console.log(this.addPetForm.value);
     this.addPetForm.reset();
+  }
+
+  deletePet(pet:Pet): void {
+    this.petService.deleteById(pet.id).subscribe(() => {
+      this.getPets();
+    });
+
   }
 
 }
