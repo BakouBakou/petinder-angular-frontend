@@ -5837,7 +5837,7 @@ button.close {
 }
 
 .text-hide {
-  font: 0/0 a;
+  /*font: 0/0 a;*/
   color: transparent;
   text-shadow: none;
   background-color: transparent;
@@ -5854,7 +5854,7 @@ button.close {
 }
 
 @-ms-viewport {
-  width: device-width
+  /*width: device-width*/
 }
 
 .visible-lg, .visible-md, .visible-sm, .visible-xs, td.visible-lg, td.visible-md, td.visible-sm, td.visible-xs, th.visible-lg, th.visible-md, th.visible-sm, th.visible-xs, tr.visible-lg, tr.visible-md, tr.visible-sm, tr.visible-xs {
