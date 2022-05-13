@@ -36,11 +36,16 @@
                    formControlName="name"
             >
             <label for="addPetKind">Kind</label>
-            <input id="addPetKind"
-                   name="addPetKind"
-                   class="form-control"
-                   formControlName="kind"
-            >
+            <select id="addPetKind"
+                    class="form-control"
+                    formControlName="kind">
+              <option
+                *ngFor="let petKind of petKindValues"
+                [value]="petKind"
+              >
+                {{petKind}}
+              </option>
+            </select>
             <label for="addPetPicture">Picture</label>
             <input id="addPetPicture"
                    name="addPetPicture"

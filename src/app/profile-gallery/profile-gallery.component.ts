@@ -4,6 +4,7 @@ import {Pet} from "../model/Pet";
 import {FormBuilder} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {closeSubscription, imageDomain} from "../helpers/helper-functions";
+import {Kind} from "../model/Kind";
 
 
 @Component({
@@ -14,6 +15,7 @@ import {closeSubscription, imageDomain} from "../helpers/helper-functions";
 export class ProfileGalleryComponent implements OnInit, OnDestroy {
 
   pets: Pet[] = [];
+  petKindValues = Object.values(Kind);
   private _selectedPet!: Pet;
   private _searchText: string = '';
   private getPetsSubscription!: Subscription;
@@ -23,7 +25,7 @@ export class ProfileGalleryComponent implements OnInit, OnDestroy {
 
   addPetForm = this.formBuilder.group({
     name: '',
-    kind: '',
+    kind: Kind.Cat,
     image: '',
     profileText: '',
   })
