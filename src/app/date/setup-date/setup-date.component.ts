@@ -22,6 +22,7 @@ export class SetupDateComponent implements OnInit, OnDestroy {
   })
 
   private routeParamSubscription!: Subscription;
+  private increasePopularitySubscription!: Subscription;
 
   constructor(private route: ActivatedRoute, private petService: PetService, private formBuilder: FormBuilder) { }
 
@@ -36,7 +37,7 @@ export class SetupDateComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     closeSubscription(this.getPetByNameSubscription);
     closeSubscription(this.routeParamSubscription);
-
+    closeSubscription(this.increasePopularitySubscription);
   }
 
   private getPetByName(name: string): void {
@@ -46,6 +47,11 @@ export class SetupDateComponent implements OnInit, OnDestroy {
   onSubmitLetsPlay() {
     // this.sendMessage(); //not working for now -> "Username cannot be null"
     console.log(this.sendTextForm.value);
+    this.increasePopularitySubscription = this.increasePopularity();
+  }
+
+  private increasePopularity() {
+    return this.petService.increasePopularity(this.pet.name).subscribe();
   }
 
   sendMessage() {

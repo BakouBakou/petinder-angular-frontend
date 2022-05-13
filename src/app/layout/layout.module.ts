@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {ProfileGalleryComponent} from "../profile-gallery/profile-gallery.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NameFilterPipe} from "../pipes/name-filter.pipe";
+import {PopularityLabelPipe} from "../pipes/popularity-label.pipe";
 
 
 @NgModule({
@@ -15,13 +16,14 @@ import {NameFilterPipe} from "../pipes/name-filter.pipe";
     FooterComponent,
     ProfileGalleryComponent,
     LayoutComponent,
-    NameFilterPipe
+    NameFilterPipe,
+    PopularityLabelPipe
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     LayoutComponent

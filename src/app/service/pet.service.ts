@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
 import {Pet} from "../model/Pet";
@@ -33,8 +33,11 @@ export class PetService {
   }
 
   sendWhatsApp(name: string): Observable<void> {
-    // const httpOptions = {headers: new HttpHeaders({'Username': name})};
     return this.http.post<void>(this.url + '/sendText', name);
+  }
+
+  increasePopularity(name: string): Observable<void> {
+    return this.http.get<void>(this.url + '/'  + name + '/incrementPopularity');
   }
 
 }
