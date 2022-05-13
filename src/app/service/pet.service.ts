@@ -33,7 +33,8 @@ export class PetService {
   }
 
   sendWhatsApp(name: string): Observable<void> {
-    return this.http.post<void>(this.url + '/sendText', name, {headers: new HttpHeaders({'Username': name})});
+    // const httpOptions = {headers: new HttpHeaders({'Username': name})};
+    return this.http.post<void>(this.url + '/sendText', name);
   }
 
 }

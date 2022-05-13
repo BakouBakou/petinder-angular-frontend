@@ -44,7 +44,7 @@ export class SetupDateComponent implements OnInit, OnDestroy {
   }
 
   onSubmitLetsPlay() {
-    // this.sendMessage(); //not working for now as it requires authentication
+    // this.sendMessage(); //not working for now -> "Username cannot be null"
     console.log(this.sendTextForm.value);
   }
 
